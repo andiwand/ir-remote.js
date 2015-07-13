@@ -3,8 +3,8 @@ var IR = IR || {};
 IR.interface = IR.interface || {};
 
 $.extend(IR.interface, {
-  load: Util.notImplemented,       // TODO
-  save: Util.notImplemented        // TODO
+  load: andiwand.notImplemented,       // TODO: doc
+  save: andiwand.notImplemented        // TODO: doc
 });
 
 var IR = IR || {};
