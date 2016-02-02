@@ -1,70 +1,67 @@
-var IR = IR || {};
+var ir = ir || {};
 
-IR.interface = IR.interface || {};
+ir.interface = ir.interface || {};
 
-$.extend(IR.interface, {
-  load: andiwand.notImplemented,       // TODO: doc
-  save: andiwand.notImplemented        // TODO: doc
+$.extend(ir.interface, {
+  load: undefined,  // TODO: doc
+  save: undefined   // TODO: doc
 });
 
-var IR = IR || {};
+var ir = ir || {};
 
-IR.remote = IR.remote || {};
+ir.remote = ir.remote || {};
 
-IR.remote.default_state = {
-  settings: {},
-  remotes: []
-};
-
-$.extend(IR.remote, {
-  state: null,
-  config: null, // TODO: only use this for config
+$.extend(ir.remote, {
   _ready: false,
   _observers: [],
-  
+  settings: {},
+  remotes: [],
+  devices: [],
+
   init: function() {
-    IR.interface.load(IR.remote._loaded);
+    if (ir.interface.load) {
+      ir.interface.load(ir.remote._onLoaded);
+    } else {
+      ir.remote._onLoaded(null);
+    }
   },
   isReady: function() {
-    return IR.remote._ready;
+    return ir.remote._ready;
   },
   _fire: function() {
-    for(var i = 0; i < IR.remote._observers.length; i++) {
-      IR.remote._observers[i]();
+    for(var i = 0; i < ir.remote._observers.length; i++) {
+      ir.remote._observers[i]();
     }
   },
   addObserver: function(observer) {
-    if (IR.remote._ready) observer();
-    IR.remote._observers.push(observer);
+    if (ir.remote._ready) observer();
+    ir.remote._observers.push(observer);
   },
   _verify: function(config) {
     // TODO: implement
     return true;
   },
   _load: function(config) {
-    var state = {};
+    if (!config) return;
 
     // TODO: deep copy
-    $.extend(state, IR.remote.default_state);
-    $.extend(state, config);
-    state.devices = [];
-
-    IR.remote.state = state;
+    ir.remote.settings = config.settings;
+    ir.remote.remotes = config.remotes;
   },
-  _loaded: function(config) {
-    IR.remote._verify(config);
-    IR.remote._load(config);
+  _onLoaded: function(config) {
+    ir.remote._verify(config);
+    ir.remote._load(config);
 
-    IR.remote._ready = true;
-    IR.remote._fire();
+    ir.remote._ready = true;
+    ir.remote._fire();
   },
   save: function() {
     var config = {};
 
-    // TODO: maybe deep copy
-    $.extend(config, IR.remote.state);
-    delete config.devices;
+    // TODO: deep copy
+    config.settings = ir.remote.settings;
+    config.remotes = ir.remote.remotes;
 
-    IR.interface.save(config);
+    ir.interface.save(config);
   }
 });

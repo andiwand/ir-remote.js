@@ -1,8 +1,8 @@
-var IR = IR || {};
+var ir = ir || {};
 
-IR.interface = IR.interface || {};
+ir.interface = ir.interface || {};
 
-$.extend(IR.interface, {
-  load: andiwand.notImplemented,       // TODO: doc
-  save: andiwand.notImplemented        // TODO: doc
+$.extend(ir.interface, {
+  load: undefined,  // TODO: doc
+  save: undefined   // TODO: doc
 });
