@@ -36,8 +36,8 @@ $.extend(ir.remote, {
     if (!config) return;
 
     // TODO: deep copy
-    ir.remote.settings = config.settings;
-    ir.remote.remotes = config.remotes;
+    if (config.settings) ir.remote.settings = config.settings;
+    if (config.remotes) ir.remote.remotes = config.remotes;
   },
   _onLoaded: function(config) {
     ir.remote._verify(config);
