@@ -3,8 +3,8 @@ var ir = ir || {};
 ir.interface = ir.interface || {};
 
 $.extend(ir.interface, {
-  load: undefined,  // TODO: doc
-  save: undefined   // TODO: doc
+  load: undefined,  // TODO: void load(callback); void callback(config);
+  save: undefined   // TODO: void save(config)
 });
 
 var ir = ir || {};
@@ -62,6 +62,11 @@ $.extend(ir.remote, {
     config.settings = ir.remote.settings;
     config.remotes = ir.remote.remotes;
 
-    ir.interface.save(config);
+    if (ir.interface.save) {
+      ir.interface.save(config);
+    } else {
+      console.error("could not save config");
+      console.error(config);
+    }
   }
 });
