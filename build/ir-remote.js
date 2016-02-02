@@ -11,10 +11,17 @@ var IR = IR || {};
 
 IR.remote = IR.remote || {};
 
+IR.remote.default_state = {
+  settings: {},
+  remotes: []
+};
+
 $.extend(IR.remote, {
   state: null,
+  config: null, // TODO: only use this for config
   _ready: false,
   _observers: [],
+  
   init: function() {
     IR.interface.load(IR.remote._loaded);
   },
@@ -37,7 +44,8 @@ $.extend(IR.remote, {
   _load: function(config) {
     var state = {};
 
-    // TODO: maybe deep copy
+    // TODO: deep copy
+    $.extend(state, IR.remote.default_state);
     $.extend(state, config);
     state.devices = [];
 

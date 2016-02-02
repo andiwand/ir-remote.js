@@ -33,7 +33,7 @@ $.extend(IR.remote, {
     return true;
   },
   _load: function(config) {
-    var state = {];
+    var state = {};
 
     // TODO: deep copy
     $.extend(state, IR.remote.default_state);
