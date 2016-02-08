@@ -2,7 +2,7 @@
   "name": "ir-remote.js",
   "version": "0.0.1",
   "dependencies": {
-    "jquery": "git+https://github.com/jquery/jquery.git#2.0.3",
+    "jquery": "~2.2.0",
     "observe-js": "git+https://github.com/Polymer/observe-js",
     "commons.js": "git+https://github.com/andiwand/commons.js.git"
   },
